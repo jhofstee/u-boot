@@ -20,6 +20,8 @@
 #include <asm/arch/imx-regs.h>
 #endif
 
+int main(void);
+
 int main(void)
 {
 	/*

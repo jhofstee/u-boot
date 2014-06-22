@@ -16,6 +16,8 @@
 
 #include <linux/kbuild.h>
 
+int main(void);
+
 int main(void)
 {
 	/* Round up to make sure size gives nice stack alignment */

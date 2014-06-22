@@ -8,6 +8,12 @@
 
 #include <common.h>
 
+int raise (int signum);
+void __aeabi_unwind_cpp_pr0(void);
+void __aeabi_unwind_cpp_pr1(void);
+void __aeabi_memcpy(void *dest, const void *src, size_t n);
+void __aeabi_memset(void *dest, size_t n, int c);
+
 int raise (int signum)
 {
 	/* Even if printf() is available, it's large. Punt it for SPL builds */
