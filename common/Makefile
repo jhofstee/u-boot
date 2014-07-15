@@ -298,4 +298,7 @@ obj-y += s_record.o
 obj-y += xyzModem.o
 obj-y += cmd_disk.o
 
-CFLAGS_env_embedded.o := -Wa,--no-warn -DENV_CRC=$(shell tools/envcrc 2>/dev/null)
+CFLAGS_env_embedded.o := -DENV_CRC=$(shell tools/envcrc 2>/dev/null)
+ifeq ($(ARCH),powerpc)
+CFLAGS_env_embedded.o += -Wa,--no-warn
+endif
