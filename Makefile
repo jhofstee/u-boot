@@ -337,7 +337,7 @@ LD		= $(CROSS_COMPILE)ld.bfd
 else
 LD		= $(CROSS_COMPILE)ld
 endif
-CC		= $(CROSS_COMPILE)gcc
+CC		= clang -target arm-linux-gnueabi -mllvm -arm-use-movt=0 -no-integrated-as
 CPP		= $(CC) -E
 AR		= $(CROSS_COMPILE)ar
 NM		= $(CROSS_COMPILE)nm
