@@ -15,6 +15,7 @@ obj-$(CONFIG_CMD_DNS)  += dns.o
 obj-$(CONFIG_CMD_NET)  += eth.o
 obj-$(CONFIG_CMD_LINK_LOCAL) += link_local.o
 obj-$(CONFIG_CMD_NET)  += net.o
+CFLAGS_eth.o += $(call cc-option,-Wno-format-extra-args)
 obj-$(CONFIG_CMD_NFS)  += nfs.o
 obj-$(CONFIG_CMD_PING) += ping.o
 obj-$(CONFIG_CMD_RARP) += rarp.o
