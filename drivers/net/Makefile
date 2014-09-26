@@ -27,6 +27,7 @@ obj-$(CONFIG_ENC28J60) += enc28j60.o
 obj-$(CONFIG_EP93XX) += ep93xx_eth.o
 obj-$(CONFIG_ETHOC) += ethoc.o
 obj-$(CONFIG_FEC_MXC) += fec_mxc.o
+CFLAGS_fec_mxc.o = $(call cc-option,-Wno-format-extra-args)
 obj-$(CONFIG_FSLDMAFEC) += fsl_mcdmafec.o mcfmii.o
 obj-$(CONFIG_FTGMAC100) += ftgmac100.o
 obj-$(CONFIG_FTMAC110) += ftmac110.o
