@@ -11,7 +11,7 @@
 # ==========================================================================
 
 ifeq ("$(origin W)", "command line")
-  export KBUILD_ENABLE_EXTRA_GCC_CHECKS := $(W)
+  export KBUILD_ENABLE_EXTRA_GCC_CHECKS := 1
 endif
 
 ifdef KBUILD_ENABLE_EXTRA_GCC_CHECKS

@@ -649,7 +649,7 @@ build_target() {
 	echo "Building ${target} board..."
 	${MAKE} -s ${target}_defconfig >/dev/null
 
-	${MAKE} ${JOBS} ${CHECK} all \
+	${MAKE} ${JOBS} ${CHECK} W=1 all \
 		>${LOG_DIR}/$target.MAKELOG 2> ${LOG_DIR}/$target.ERR
 
 	# Check for 'make' errors
