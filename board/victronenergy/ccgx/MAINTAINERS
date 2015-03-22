@@ -1,0 +1,6 @@
+Victron Energy BOARDS
+M:	Jeroen Hofstee <jhofstee@victronenergy.com>
+S:	Maintained
+F:	board/victronenergy
+F:	include/configs/ccgx.h
+F:	configs/ccgx_defconfig

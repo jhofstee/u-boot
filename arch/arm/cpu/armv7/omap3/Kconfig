@@ -101,6 +101,10 @@ config TARGET_TWISTER
 	bool "Twister"
 	select SUPPORT_SPL
 
+config TARGET_CCGX
+        bool "CCGX"
+        select SUPPORT_SPL
+
 config TARGET_OMAP3_CAIRO
 	bool "QUIPOS CAIRO"
 	select SUPPORT_SPL

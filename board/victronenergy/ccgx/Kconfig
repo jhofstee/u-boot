@@ -1,0 +1,12 @@
+if TARGET_CCGX
+
+config SYS_BOARD
+	default "ccgx"
+
+config SYS_VENDOR
+	default "victronenergy"
+
+config SYS_CONFIG_NAME
+	default "ccgx"
+
+endif
