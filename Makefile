@@ -614,7 +614,14 @@ UBOOTINCLUDE    := \
 		-I$(srctree)/arch/$(ARCH)/include \
 		-include $(srctree)/include/linux/kconfig.h
 
-NOSTDINC_FLAGS += -nostdinc -isystem $(shell $(CC) -print-file-name=include)
+BUILDIN_DIR = $(shell $(CC) -print-file-name=include)
+STD_DIR = $(shell dirname `echo '\#include <stdbool.h>' | $(CC) -H -E -o /dev/null 2>&1 - | awk '{print $$2}'`)
+
+NOSTDINC_FLAGS += -nostdinc -isystem $(BUILDIN_DIR)
+ifneq ($(BUILDIN_DIR),$(STD_DIR))
+ NOSTDINC_FLAGS += -isystem $(STD_DIR)
+endif
+
 CHECKFLAGS     += $(NOSTDINC_FLAGS)
 
 # FIX ME
