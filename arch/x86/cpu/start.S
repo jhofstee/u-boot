@@ -122,9 +122,10 @@ car_init_ret:
 	 */
 #endif
 	/* Set up global data */
+	call	board_init_f_get_reserve_size
+	subl	%eax, %esp
 	mov	%esp, %eax
-	call	board_init_f_mem
-	mov	%eax, %esp
+	call	board_init_f_init_reserve
 
 #ifdef CONFIG_DEBUG_UART
 	call	debug_uart_init

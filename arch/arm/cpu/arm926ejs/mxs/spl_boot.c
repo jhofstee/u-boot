@@ -123,7 +123,7 @@ void mxs_common_spl_init(const uint32_t arg, const uint32_t *resptr,
 	struct mxs_spl_data *data = (struct mxs_spl_data *)
 		((CONFIG_SYS_TEXT_BASE - sizeof(struct mxs_spl_data)) & ~0xf);
 	uint8_t bootmode = mxs_get_bootmode_index();
-	gd = &gdata;
+	//gd = &gdata;
 
 	mxs_spl_fixup_vectors();
 

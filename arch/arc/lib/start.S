@@ -50,17 +50,19 @@ ENTRY(_start)
 1:
 #endif
 
-	/* Setup stack- and frame-pointers */
+	/* Establish C runtime stack and frame */
 	mov	%sp, CONFIG_SYS_INIT_SP_ADDR
 	mov	%fp, %sp
 
-	/* Allocate and zero GD, update SP */
-	mov	%r0, %sp
-	bl	board_init_f_mem
-
-	/* Update stack- and frame-pointers */
-	mov	%sp, %r0
+	/* Get reserved area size */
+	bl	board_init_f_get_reserve_size
+	/* Allocate reserved size on stack, adjust frame pointer accordingly */
+	sub	%sp, %sp, %r0
 	mov	%fp, %sp
+
+	/* Initialize reserved area */
+	mov	%r0, %sp
+	bl	board_init_f_init_reserve
 
 	/* Zero the one and only argument of "board_init_f" */
 	mov_s	%r0, 0

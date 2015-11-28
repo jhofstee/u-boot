@@ -447,7 +447,7 @@ ulong spl_relocate_stack_gd(void)
 	ptr &= ~7;
 	new_gd = (gd_t *)ptr;
 	memcpy(new_gd, (void *)gd, sizeof(gd_t));
-	gd = new_gd;
+	//gd = new_gd;
 
 #ifdef CONFIG_SPL_SYS_MALLOC_SIMPLE
 	if (CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN) {

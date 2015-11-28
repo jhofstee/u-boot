@@ -82,9 +82,11 @@ ENTRY(_main)
 #else
 	bic	sp, sp, #7	/* 8-byte alignment for ABI compliance */
 #endif
+	bl	board_init_f_get_reserve_size
+	sub	sp, sp, r0
+	mov	r9, sp
 	mov	r0, sp
-	bl	board_init_f_mem
-	mov	sp, r0
+	bl	board_init_f_init_reserve
 
 	mov	r0, #0
 	bl	board_init_f

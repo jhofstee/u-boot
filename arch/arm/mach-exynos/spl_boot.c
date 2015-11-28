@@ -258,37 +258,9 @@ void copy_uboot_to_ram(void)
 		copy_bl2(offset, size, CONFIG_SYS_TEXT_BASE);
 }
 
-void memzero(void *s, size_t n)
-{
-	char *ptr = s;
-	size_t i;
-
-	for (i = 0; i < n; i++)
-		*ptr++ = '\0';
-}
-
-/**
- * Set up the U-Boot global_data pointer
- *
- * This sets the address of the global data, and sets up basic values.
- *
- * @param gdp   Value to give to gd
- */
-static void setup_global_data(gd_t *gdp)
-{
-	gd = gdp;
-	memzero((void *)gd, sizeof(gd_t));
-	gd->flags |= GD_FLG_RELOC;
-	gd->baudrate = CONFIG_BAUDRATE;
-	gd->have_console = 1;
-}
-
 void board_init_f(unsigned long bootflag)
 {
-	__aligned(8) gd_t local_gd;
 	__attribute__((noreturn)) void (*uboot)(void);
-
-	setup_global_data(&local_gd);
 
 	if (do_lowlevel_init())
 		power_exit_wakeup();

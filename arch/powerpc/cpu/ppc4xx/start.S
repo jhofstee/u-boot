@@ -761,9 +761,10 @@ _start:
 
 	bl	cpu_init_f	/* run low-level CPU init code	   (from Flash) */
 #ifdef CONFIG_SYS_GENERIC_BOARD
+	bl	board_init_f_get_reserve_size
+	sub	r1, r1, r3
 	mr	r3, r1
-	bl	board_init_f_mem
-	mr	r1, r3
+	bl	board_init_f_init_reserve
 	li	r0,0
 	stwu	r0, -4(r1)
 	stwu	r0, -4(r1)
@@ -1037,9 +1038,10 @@ _start:
 
 	bl	cpu_init_f	/* run low-level CPU init code	   (from Flash) */
 #ifdef CONFIG_SYS_GENERIC_BOARD
+	bl	board_init_f_get_reserve_size
+	sub	r1, r1, r3
 	mr	r3, r1
-	bl	board_init_f_mem
-	mr	r1, r3
+	bl	board_init_f_init_reserve
 	stwu	r0, -4(r1)
 	stwu	r0, -4(r1)
 #endif

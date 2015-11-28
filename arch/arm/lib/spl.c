@@ -35,11 +35,6 @@ void __weak board_init_f(ulong dummy)
 	/* Clear the BSS. */
 	memset(__bss_start, 0, __bss_end - __bss_start);
 
-#ifndef CONFIG_SPL_DM
-	/* TODO: Remove settings of the global data pointer here */
-	gd = &gdata;
-#endif
-
 	board_init_r(NULL, 0);
 }
 
