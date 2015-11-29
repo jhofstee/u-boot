@@ -37,7 +37,9 @@ tune-$(CONFIG_ARM64)		=
 # Evaluate tune cc-option calls now
 tune-y := $(tune-y)
 
-PLATFORM_CPPFLAGS += $(arch-y) $(tune-y)
+# -Xassembler is a workaround for clang on FreeBSD, see
+# https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=204894
+PLATFORM_CPPFLAGS += $(arch-y) $(tune-y) -Xassembler $(arch-y)
 
 # Machine directory name.  This list is sorted alphanumerically
 # by CONFIG_* macro name.
