@@ -223,11 +223,11 @@ int __weak misc_init_r(void)
  * Routine: wait_for_command_complete
  * Description: Wait for posting to finish on watchdog
  *****************************************************************************/
-static void wait_for_command_complete(struct watchdog *wd_base)
+static void wait_for_command_complete(struct wd_timer *wd_base)
 {
 	int pending = 1;
 	do {
-		pending = readl(&wd_base->wwps);
+		pending = readl(&wd_base->wdtwwps);
 	} while (pending);
 }
 
@@ -237,7 +237,7 @@ static void wait_for_command_complete(struct watchdog *wd_base)
  *****************************************************************************/
 void watchdog_init(void)
 {
-	struct watchdog *wd2_base = (struct watchdog *)WD2_BASE;
+	struct wd_timer *wd2_base = (struct wd_timer *)WD2_BASE;
 	struct prcm *prcm_base = (struct prcm *)PRCM_BASE;
 
 	/*
@@ -251,9 +251,9 @@ void watchdog_init(void)
 	setbits_le32(&prcm_base->iclken_wkup, 0x20);
 	wait_on_value(ST_WDT2, 0x20, &prcm_base->idlest_wkup, 5);
 
-	writel(WD_UNLOCK1, &wd2_base->wspr);
+	writel(WD_UNLOCK1, &wd2_base->wdtwspr);
 	wait_for_command_complete(wd2_base);
-	writel(WD_UNLOCK2, &wd2_base->wspr);
+	writel(WD_UNLOCK2, &wd2_base->wdtwspr);
 }
 
 /******************************************************************************

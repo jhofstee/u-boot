@@ -290,11 +290,20 @@ struct gptimer {
 /* Watchdog */
 #ifndef __KERNEL_STRICT_NAMES
 #ifndef __ASSEMBLY__
-struct watchdog {
-	u8 res1[0x34];
-	u32 wwps;	/* 0x34 r */
-	u8 res2[0x10];
-	u32 wspr;	/* 0x48 rw */
+struct wd_timer {
+        unsigned int resv1[4];
+        unsigned int wdtwdsc;   /* offset 0x010 */
+        unsigned int wdtwdst;   /* offset 0x014 */
+        unsigned int wdtwisr;   /* offset 0x018 */
+        unsigned int wdtwier;   /* offset 0x01C */
+        unsigned int wdtwwer;   /* offset 0x020 */
+        unsigned int wdtwclr;   /* offset 0x024 */
+        unsigned int wdtwcrr;   /* offset 0x028 */
+        unsigned int wdtwldr;   /* offset 0x02C */
+        unsigned int wdtwtgr;   /* offset 0x030 */
+        unsigned int wdtwwps;   /* offset 0x034 */
+        unsigned int resv2[4];
+        unsigned int wdtwspr;   /* offset 0x048 */
 };
 #endif /* __ASSEMBLY__ */
 #endif /* __KERNEL_STRICT_NAMES */
@@ -435,6 +444,22 @@ struct prm {
 #define TCLR_ST			(0x1 << 0)
 #define TCLR_AR			(0x1 << 1)
 #define TCLR_PRE		(0x1 << 5)
+
+/*
+ * Watchdog:
+ * Using the prescaler, the OMAP watchdog could go for many
+ * months before firing.  These limits work without scaling,
+ * with the 60 second default assumed by most tools and docs.
+ */
+#define PTV			0	/* prescale */
+#define GET_WLDR_VAL(secs)	(0xffffffff - ((secs) * (32768/(1<<PTV))) + 1)
+#define WDT_WWPS_PEND_WCLR	BIT(0)
+#define WDT_WWPS_PEND_WLDR	BIT(2)
+#define WDT_WWPS_PEND_WTGR	BIT(3)
+#define WDT_WWPS_PEND_WSPR	BIT(4)
+
+#define WDT_WCLR_PRE		BIT(5)
+#define WDT_WCLR_PTV_OFF	2
 
 /* SMX-APE */
 #define PM_RT_APE_BASE_ADDR_ARM		(SMX_APE_BASE + 0x10000)
